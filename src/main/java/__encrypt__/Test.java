@@ -1,4 +1,4 @@
-package encrypt;
+package __encrypt__;
 
 public class Test {
     public static void main(String[] args) {

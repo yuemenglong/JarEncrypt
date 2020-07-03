@@ -78,7 +78,7 @@ public class Encrypt {
             byte[] bytes = baos.toByteArray();
 
             String name = entry.getName();
-            if (name.endsWith(".class")) {
+            if (name.endsWith(".class") && name.contains("__encrypt__")) {
                 System.out.println("encrypt " + name.replaceAll("/", "."));
                 try {
                     bytes = coder.encrypt(bytes);

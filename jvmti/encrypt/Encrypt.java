@@ -14,7 +14,9 @@ public class Encrypt {
 	native byte[] encrypt(byte[] _buf);
 
 	static {
-		System.loadLibrary("encrypt");
+		File sharedLibrary = new File("encrypt.so");
+		System.load(sharedLibrary.getAbsolutePath());
+		// System.loadLibrary("encrypt");
 	}
 
 	// 获取参数

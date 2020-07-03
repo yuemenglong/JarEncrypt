@@ -1,3 +1,5 @@
 *.jar
 *.so
 *.class
+.idea/
+scala-encrypt.iml

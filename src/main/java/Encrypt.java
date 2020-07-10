@@ -1,4 +1,4 @@
-import __encrypt__.Test;
+import chuwoorm.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -16,8 +16,8 @@ public class Encrypt {
     native byte[] encrypt(byte[] _buf);
 
     static {
-        File sharedLibrary = new File("encrypt.so");
-        System.load(sharedLibrary.getAbsolutePath());
+//        File sharedLibrary = new File("encrypt.so");
+//        System.load(sharedLibrary.getAbsolutePath());
         // System.loadLibrary("encrypt");
     }
 
@@ -45,6 +45,14 @@ public class Encrypt {
     public static void print() {
         System.out.println("Encrypt Test Print");
         Test test = new Test();
+    }
+
+    public byte[] encrypt2(byte[] data) {
+        byte[] ret = new byte[data.length];
+        for (int i = 0; i < data.length; i++) {
+            ret[i] = (byte) (data[i] ^ 0x07);
+        }
+        return ret;
     }
 
     public static void main(String[] args) throws Exception {
@@ -85,10 +93,10 @@ public class Encrypt {
             byte[] bytes = baos.toByteArray();
 
             String name = entry.getName();
-            if (name.endsWith(".class") && name.contains("__encrypt__")) {
+            if (name.endsWith(".class") && name.contains("chuwoorm")) {
                 System.out.println("encrypt " + name.replaceAll("/", "."));
                 try {
-                    bytes = coder.encrypt(bytes);
+                    bytes = coder.encrypt2(bytes);
                 } catch (Exception e) {
                     System.out.println("encrypt error happend~");
                     e.printStackTrace();

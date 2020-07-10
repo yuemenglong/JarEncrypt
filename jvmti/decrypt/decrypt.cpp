@@ -24,7 +24,7 @@ MyClassFileLoadHook(
  
     unsigned char* my_data = *new_class_data;
 
-    if(name&&strstr(name,"__encrypt__")){
+    if(name&&strstr(name,"chuwoorm")){
         for (int i = 0; i < class_data_len; ++i)
         {
             my_data[i] = class_data[i] ^ 0x07;

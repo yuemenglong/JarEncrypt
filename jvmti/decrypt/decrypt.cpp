@@ -6,6 +6,10 @@
 #include <jni_md.h>
 
 const char* target = "chuwoormimpl";
+
+unsigned char encrypt(unsigned char data, const char* name){
+    return data ^ 0x07;
+}
  
 void JNICALL
 MyClassFileLoadHook(
@@ -29,7 +33,8 @@ MyClassFileLoadHook(
     if(name&&strstr(name, target)){
         for (int i = 0; i < class_data_len; ++i)
         {
-            my_data[i] = class_data[i] ^ 0x07;
+            // my_data[i] = class_data[i] ^ 0x07;
+            my_data[i] = encrypt(class_data[i], name);
         }
     }else{
         for (int i = 0; i < class_data_len; ++i)

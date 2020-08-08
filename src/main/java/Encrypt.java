@@ -36,11 +36,6 @@ public class Encrypt {
         return map;
     }
 
-    public static void print() {
-        System.out.println("Encrypt Test Print");
-        LibImpl test = new LibImpl();
-    }
-
     public byte[] encryptData(byte[] data, String name) {
         byte[] ret = new byte[data.length];
         for (int i = 0; i < data.length; i++) {
@@ -51,7 +46,16 @@ public class Encrypt {
     }
 
     public byte encrypt(byte data, String name) {
-        return (byte) (data ^ 0x07);
+        int h = 0;
+        byte[] val = name.getBytes();
+
+        for (byte b : val) {
+            h = 31 * h + b;
+            System.out.println(String.format("byte %d, h %d", b, h));
+        }
+        byte op = (byte) (h % 256);
+        System.out.println(String.format("h %d, op %d\n", h, op));
+        return (byte) (data ^ op);
     }
 
     public static void main(String[] args) throws Exception {

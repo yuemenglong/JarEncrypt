@@ -8,7 +8,23 @@
 const char* target = "chuwoormimpl";
 
 inline unsigned char encrypt(unsigned char data, const char* name){
-    return data ^ 0x07;
+    int h = 0;
+    const char* name2 = ".class";
+    const char* val = name;
+    int length = strlen(name);
+
+    for (int i = 0; i < length; i++) {
+        h = 31 * h + val[i];
+        printf("byte %d, h %d\n", val[i], h);
+    }
+    length = strlen(name2);
+    for (int i = 0; i < length; i++) {
+        h = 31 * h + name2[i];
+        printf("byte %d, h %d\n", name2[i], h);
+    }
+    char op = (char)(h % 256);
+    printf("h %d, op %d\n", h, op);
+    return data ^ op;
 }
  
 void JNICALL

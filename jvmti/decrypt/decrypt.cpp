@@ -4,6 +4,8 @@
 #include <jvmti.h>
 #include <jni.h>
 #include <jni_md.h>
+
+const char* target = "chuwoormimpl";
  
 void JNICALL
 MyClassFileLoadHook(
@@ -24,7 +26,7 @@ MyClassFileLoadHook(
  
     unsigned char* my_data = *new_class_data;
 
-    if(name&&strstr(name,"chuwoorm")){
+    if(name&&strstr(name, target)){
         for (int i = 0; i < class_data_len; ++i)
         {
             my_data[i] = class_data[i] ^ 0x07;

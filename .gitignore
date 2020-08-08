@@ -4,3 +4,4 @@
 .idea/
 scala-encrypt.iml
 target
+run_enc.sh

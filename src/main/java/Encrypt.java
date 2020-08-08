@@ -1,4 +1,4 @@
-import chuwoorm.Test;
+import chuwoormimpl.LibImpl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -13,13 +13,7 @@ import java.util.jar.JarOutputStream;
 
 public class Encrypt {
 
-    native byte[] encrypt(byte[] _buf);
-
-    static {
-//        File sharedLibrary = new File("encrypt.so");
-//        System.load(sharedLibrary.getAbsolutePath());
-        // System.loadLibrary("encrypt");
-    }
+    private static final String target = "chuwoormimpl";
 
     // 获取参数
     static Map<String, String> getArgMap(String[] args) {
@@ -44,10 +38,10 @@ public class Encrypt {
 
     public static void print() {
         System.out.println("Encrypt Test Print");
-        Test test = new Test();
+        LibImpl test = new LibImpl();
     }
 
-    public byte[] encrypt2(byte[] data) {
+    public byte[] encrypt2(byte[] data, String className) {
         byte[] ret = new byte[data.length];
         for (int i = 0; i < data.length; i++) {
             ret[i] = (byte) (data[i] ^ 0x07);
@@ -93,10 +87,10 @@ public class Encrypt {
             byte[] bytes = baos.toByteArray();
 
             String name = entry.getName();
-            if (name.endsWith(".class") && name.contains("chuwoorm")) {
+            if (name.endsWith(".class") && name.contains(target)) {
                 System.out.println("encrypt " + name.replaceAll("/", "."));
                 try {
-                    bytes = coder.encrypt2(bytes);
+                    bytes = coder.encrypt2(bytes, name);
                 } catch (Exception e) {
                     System.out.println("encrypt error happend~");
                     e.printStackTrace();

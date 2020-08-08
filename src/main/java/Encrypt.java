@@ -1,5 +1,3 @@
-import chuwoormimpl.LibImpl;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,26 +34,20 @@ public class Encrypt {
         return map;
     }
 
-    public byte[] encryptData(byte[] data, String name) {
-        byte[] ret = new byte[data.length];
-        for (int i = 0; i < data.length; i++) {
-//            ret[i] = (byte) (data[i] ^ 0x07);
-            ret[i] = encrypt(data[i], name);
-        }
-        return ret;
-    }
-
-    public byte encrypt(byte data, String name) {
+    public byte[] encrypt(byte[] data, String name) {
         int h = 0;
-        byte[] val = name.getBytes();
+        byte[] val = String.format("%s%s", name, "path").getBytes();
 
         for (byte b : val) {
             h = 31 * h + b;
-            System.out.println(String.format("byte %d, h %d", b, h));
         }
         byte op = (byte) (h % 256);
-        System.out.println(String.format("h %d, op %d\n", h, op));
-        return (byte) (data ^ op);
+
+        byte[] ret = new byte[data.length];
+        for (int i = 0; i < data.length; i++) {
+            ret[i] = (byte) (data[i] ^ op);
+        }
+        return ret;
     }
 
     public static void main(String[] args) throws Exception {
@@ -99,7 +91,7 @@ public class Encrypt {
             if (name.endsWith(".class") && name.contains(target)) {
                 System.out.println("encrypt " + name.replaceAll("/", "."));
                 try {
-                    bytes = coder.encryptData(bytes, name);
+                    bytes = coder.encrypt(bytes, name);
                 } catch (Exception e) {
                     System.out.println("encrypt error happend~");
                     e.printStackTrace();

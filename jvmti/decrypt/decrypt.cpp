@@ -7,7 +7,7 @@
 
 const char* target = "chuwoormimpl";
 
-unsigned char encrypt(unsigned char data, const char* name){
+inline unsigned char encrypt(unsigned char data, const char* name){
     return data ^ 0x07;
 }
  

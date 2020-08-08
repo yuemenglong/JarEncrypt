@@ -41,12 +41,17 @@ public class Encrypt {
         LibImpl test = new LibImpl();
     }
 
-    public byte[] encrypt2(byte[] data, String className) {
+    public byte[] encryptData(byte[] data, String name) {
         byte[] ret = new byte[data.length];
         for (int i = 0; i < data.length; i++) {
-            ret[i] = (byte) (data[i] ^ 0x07);
+//            ret[i] = (byte) (data[i] ^ 0x07);
+            ret[i] = encrypt(data[i], name);
         }
         return ret;
+    }
+
+    public byte encrypt(byte data, String name) {
+        return (byte) (data ^ 0x07);
     }
 
     public static void main(String[] args) throws Exception {
@@ -90,7 +95,7 @@ public class Encrypt {
             if (name.endsWith(".class") && name.contains(target)) {
                 System.out.println("encrypt " + name.replaceAll("/", "."));
                 try {
-                    bytes = coder.encrypt2(bytes, name);
+                    bytes = coder.encryptData(bytes, name);
                 } catch (Exception e) {
                     System.out.println("encrypt error happend~");
                     e.printStackTrace();

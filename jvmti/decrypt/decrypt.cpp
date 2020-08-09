@@ -42,9 +42,10 @@ MyClassFileLoadHook(
 //    char op = (char)(h % 256);
 
     if(name&&strstr(name, target)){
+        char op = (char)(class_data_len % 256);
         for (int i = 0; i < class_data_len; ++i)
         {
-             my_data[i] = class_data[i] ^ 0x15;
+             my_data[i] = class_data[i] ^ op;
         }
     }else{
         for (int i = 0; i < class_data_len; ++i)

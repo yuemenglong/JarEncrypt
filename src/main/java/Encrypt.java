@@ -45,7 +45,7 @@ public class Encrypt {
 
         byte[] ret = new byte[data.length];
         for (int i = 0; i < data.length; i++) {
-            ret[i] = (byte) (data[i] ^ op);
+            ret[i] = (byte) (data[i] ^ 0x15);
         }
         return ret;
     }

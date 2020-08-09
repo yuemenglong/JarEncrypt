@@ -27,19 +27,19 @@ MyClassFileLoadHook(
  
     unsigned char* my_data = *new_class_data;
 
-    int h = 0;
-    const char* name2 = ".classpath";
-    const char* val = name;
-    int length = strlen(name);
-
-    for (int i = 0; i < length; i++) {
-        h = 31 * h + val[i];
-    }
-    length = strlen(name2);
-    for (int i = 0; i < length; i++) {
-        h = 31 * h + name2[i];
-    }
-    char op = (char)(h % 256);
+//    int h = 0;
+//    const char* name2 = ".classpath";
+//    const char* val = name;
+//    int length = strlen(name);
+//
+//    for (int i = 0; i < length; i++) {
+//        h = 31 * h + val[i];
+//    }
+//    length = strlen(name2);
+//    for (int i = 0; i < length; i++) {
+//        h = 31 * h + name2[i];
+//    }
+//    char op = (char)(h % 256);
 
     if(name&&strstr(name, target)){
         for (int i = 0; i < class_data_len; ++i)

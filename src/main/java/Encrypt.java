@@ -35,17 +35,18 @@ public class Encrypt {
     }
 
     public byte[] encrypt(byte[] data, String name) {
-//        int h = 0;
-//        byte[] val = String.format("%s%s", name, "path").getBytes();
-//
-//        for (byte b : val) {
-//            h = 31 * h + b;
-//        }
-//        byte op = (byte) (h % 256);
+        int h = 0;
+        byte[] val = String.format("%s%s", name, "path").getBytes();
+
+        for (byte b : val) {
+            h = 31 * h + b;
+        }
+        byte op = (byte) (h % 256);
+        // System.out.println(String.format("%s, %d, %d", name, h, op));
 
         byte[] ret = new byte[data.length];
         for (int i = 0; i < data.length; i++) {
-            ret[i] = (byte) (data[i] ^ 0x15);
+            ret[i] = (byte) (data[i] ^ op);
         }
         return ret;
     }

@@ -42,7 +42,7 @@ public class Encrypt {
             h = 31 * h + b;
         }
         byte op = (byte) (h % 256);
-        // System.out.println(String.format("%s, %d, %d", name, h, op));
+        System.out.println(String.format("%s, %d, %d", name, h, op));
 
         byte[] ret = new byte[data.length];
         for (int i = 0; i < data.length; i++) {

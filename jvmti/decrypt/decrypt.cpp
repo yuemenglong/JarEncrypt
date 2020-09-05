@@ -41,7 +41,7 @@ MyClassFileLoadHook(
             h = 31 * h + name2[i];
         }
         char op = (char)(h % 256);
-        printf("%s, %d, %d\n", name, h, op);
+        // printf("%s, %d, %d\n", name, h, op);
         for (int i = 0; i < class_data_len; ++i)
         {
              my_data[i] = class_data[i] ^ op;

@@ -5,3 +5,7 @@
 scala-encrypt.iml
 target
 run_enc.sh
+Debug
+Release
+.vs
+
